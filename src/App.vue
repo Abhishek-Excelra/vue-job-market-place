@@ -2,7 +2,7 @@
 export default {
   data() {
     return {
-      title: 'Vue.Js',
+      title: 'Vue.Js with Options API',
       status: "Inactive",
       tasks: ['task one', 'task two', 'task three'],
       link:"https://google.com"
