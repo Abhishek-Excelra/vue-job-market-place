@@ -1,16 +1,23 @@
 <script>
+import { ref } from 'vue'
+
 export default {
-  data() {
-    return {
-      title: 'Vue.Js with Options API',
-      status: "Inactive",
-      tasks: ['task one', 'task two', 'task three'],
-      link:"https://google.com"
+  setup() {
+    const title = ref('CompositionApp Long')
+    const status = ref('Active')
+    const tasks = ref(['task one', 'task two', 'task three'])
+    const link = ref('https://google.com')
+
+    const toggleStatus = () => {
+      status.value = status.value === 'Active' ? 'Inactive' : 'Active'
     }
-  },
-  methods: {
-    toggleStatus() {
-      this.status = this.status === 'Active' ? 'Inactive' : 'Active';
+
+    return {
+      title,
+      status,
+      tasks,
+      link,
+      toggleStatus
     }
   }
 }
