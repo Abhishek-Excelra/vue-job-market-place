@@ -7,6 +7,11 @@ export default {
       tasks: ['task one', 'task two', 'task three'],
       link:"https://google.com"
     }
+  },
+  methods: {
+    toggleStatus() {
+      this.status = this.status === 'Active' ? 'Inactive' : 'Active';
+    }
   }
 }
 </script>
@@ -23,4 +28,7 @@ export default {
     <li v-for="task in tasks" :key="task">{{ task }}</li>
   </ul>
   <a :href="link">Google</a>
+  <br />
+  <br />
+  <button @click="toggleStatus">Status change</button>
 </template>
