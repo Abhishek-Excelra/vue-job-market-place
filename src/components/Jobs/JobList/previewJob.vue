@@ -3,27 +3,33 @@ import { onMounted, ref } from 'vue';
 import axios from 'axios';
 import Card from '@/components/common/Card/Card.vue';
 import { RouterLink } from 'vue-router';
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 
 const props = defineProps({
   id: String
 });
 
 const job = ref(null);
+const loading = ref(true);
 
-onMounted(() => {
-  try{
-    axios.get(`http://localhost:7000/jobs/${props.id}`).then(response => {
-      job.value = response.data
-    })
-  }catch(error){
-    console.log(error)
+onMounted(async () => {
+  try {
+    const response = await axios.get(`http://localhost:7000/jobs/${props.id}`)
+    job.value = response.data
+  } catch (error) {
+    console.error(error)
+  } finally {
+    loading.value = false
   }
 })
 
 const goBack = () => window.history.back();
 </script>
 <template>
-  <div v-if="job" class="job-detail">
+  <div v-if="loading" class="loader-wrapper">
+    <PulseLoader color="#0f172a" size="20px" />
+  </div>
+  <div v-else-if="job" class="job-detail">
     <button class="job-detail__back" @click="goBack">← Back to Jobs</button>
 
     <Card class="job-detail__header">
@@ -64,6 +70,13 @@ const goBack = () => window.history.back();
 </template>
 
 <style scoped>
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
 .job-detail {
   max-width: 900px;
   margin: 0 auto;

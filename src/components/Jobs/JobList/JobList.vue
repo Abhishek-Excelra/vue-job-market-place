@@ -2,22 +2,28 @@
 import { onMounted, ref } from 'vue'
 import axios from 'axios'
 import Card from '@/components/common/Card/Card.vue';
-const jobs = ref([])
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 
-onMounted(() => {
-  try{
-    axios.get('http://localhost:7000/jobs').then(response => {
-      jobs.value = response.data
-    })
-  }catch(error){
-    console.log(error)
+const jobs = ref([])
+const loading = ref(true)
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost:7000/jobs')
+    jobs.value = response.data
+  } catch (error) {
+    console.error(error)
+  } finally {
+    loading.value = false
   }
 })
-
 </script>
 
 <template>
-  <div class="jobs-wrapper">
+  <div v-if="loading" class="loader-wrapper">
+    <PulseLoader color="#0f172a" size="20px" />
+  </div>
+  <div v-else class="jobs-wrapper">
     <Card class="job-card" v-for="job in jobs" :key="job.id">
       <div>
         <h4>{{ job.title }}</h4>
@@ -28,6 +34,13 @@ onMounted(() => {
   </div>
 </template>
 <style scoped>
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
 .jobs-wrapper {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
