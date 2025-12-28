@@ -1,4 +1,5 @@
 # vue-learn-scratch
+<img width="1900" height="1006" alt="image" src="https://github.com/user-attachments/assets/6a27af3f-8a39-4efd-8434-71df93bc3a80" />
 
 This template should help get you started developing with Vue 3 in Vite.
 
