@@ -56,6 +56,12 @@ nav {
   color: #ffffff;
 }
 
+.navbar__link--active {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-weight: 700;
+}
+
 .navbar__link:focus-visible {
   outline: 2px solid rgba(56, 189, 248, 0.95);
   outline-offset: 2px;

@@ -23,7 +23,7 @@ const navLinks = ref([
     <h1 class="navbar__title">{{ title }}</h1>
     <ul class="navbar__links">
       <li class="navbar__item" v-for="value in navLinks" :key="value.name">
-        <RouterLink class="navbar__link" :to="value.path">{{ value.name }}</RouterLink>
+        <RouterLink class="navbar__link" :to="value.path" active-class="navbar__link--active">{{ value.name }}</RouterLink>
       </li>
     </ul>
   </nav>
