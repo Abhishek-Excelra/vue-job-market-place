@@ -17,6 +17,6 @@ import { RouterView } from 'vue-router';
   <!-- <FormTodoList /> -->
   <!-- <FetchUsers /> -->
   <!-- <Jobs /> -->
-  <Navbar title="Vue related Jobs" />
+  <Navbar title="JobHub" />
   <RouterView />
 </template>
