@@ -1,66 +1,70 @@
 <script setup>
-import Card from '@/components/common/Card/Card.vue'
-import { ref, onMounted } from 'vue'
-
-const jobs = ref([])
-
-onMounted(async () => {
-  const response = await fetch('https://jsonplaceholder.typicode.com/posts')
-  const data = await response.json()
-  console.log(data)
-  jobs.value = data.map(el => el.title)
-})
+import { ref } from 'vue'
+import JobData from '@/components/Jobs/JobList/jobs.json'
+import Card from '@/components/common/Card/Card.vue';
+const jobs = ref(JobData.jobs)
 </script>
 
 <template>
-  <div class="jobs-container">
-    <Card v-for="(job, index) in jobs" :key="index">
-      <div class="job-box">
-        <p>{{ job }}</p>
-        <button>Submit</button>
+  <div class="jobs-wrapper">
+    <Card class="job-card" v-for="job in jobs" :key="job.id">
+      <div>
+        <h4>{{ job.title }}</h4>
+        <p>{{ job.description }}</p>
+        <button>Apply</button>
       </div>
     </Card>
   </div>
 </template>
 <style scoped>
-button {
-  margin-left: 8px;
-  padding: 8px 12px;
-  cursor: pointer;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-.jobs-container {
+.jobs-wrapper {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* This forces 3 columns */
-  gap: 16px;
-  margin-top: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
 }
 
-.job-box {
-  background-color: #f4f4f4;
-  padding: 16px;
+.job-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+  transition: box-shadow 160ms ease, transform 160ms ease;
+}
+
+.job-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.job-card h4 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.3;
+}
+
+.job-card p {
+  margin: 0 0 1rem 0;
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.job-card button {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #0f172a;
+  border: none;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  cursor: pointer;
+  transition: background-color 160ms ease;
 }
 
-.job-box p {
-  font-size: 16px;
-  color: #333;
-}
-
-.card-title {
-  font-size: 24px;
-  margin-bottom: 20px;
-  text-align: center;
+.job-card button:hover {
+  background-color: #334155;
 }
 </style>
