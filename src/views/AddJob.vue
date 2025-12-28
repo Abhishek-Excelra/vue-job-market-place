@@ -1,10 +1,12 @@
 <script setup>
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useToast } from 'vue-toastification';
 import axios from 'axios';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 
 const router = useRouter();
+const toast = useToast();
 
 const form = reactive({
   title: '',
@@ -21,16 +23,15 @@ const form = reactive({
 });
 
 const loading = ref(false);
-const error = ref('');
 
 const submitJob = async () => {
   loading.value = true;
-  error.value = '';
   try {
     await axios.post('/api/jobs', form);
+    toast.success('Job posted successfully!');
     router.push('/jobs');
   } catch (err) {
-    error.value = 'Failed to create job. Please try again.';
+    toast.error('Failed to create job. Please try again.');
     console.error(err);
   } finally {
     loading.value = false;
@@ -51,7 +52,7 @@ const resetForm = () => {
       contactPhone: ''
     }
   });
-  error.value = '';
+  toast.info('Form reset');
 };
 </script>
 
@@ -168,8 +169,6 @@ const resetForm = () => {
         </div>
       </fieldset>
 
-      <div v-if="error" class="form-error">{{ error }}</div>
-
       <div class="form-actions">
         <button type="button" @click="resetForm" class="btn btn-secondary">Reset</button>
         <button type="submit" class="btn btn-primary" :disabled="loading">
@@ -272,16 +271,6 @@ const resetForm = () => {
 .form-group textarea {
   resize: vertical;
   min-height: 120px;
-}
-
-.form-error {
-  background-color: #fef2f2;
-  border: 1px solid #fecaca;
-  color: #dc2626;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  font-size: 0.875rem;
-  margin-bottom: 1.5rem;
 }
 
 .form-actions {
