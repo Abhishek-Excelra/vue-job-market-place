@@ -9,7 +9,7 @@ const loading = ref(true)
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:7000/jobs')
+    const response = await axios.get('/api/jobs')
     jobs.value = response.data
   } catch (error) {
     console.error(error)
