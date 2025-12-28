@@ -5,9 +5,13 @@ import Card from '@/components/common/Card/Card.vue';
 const jobs = ref([])
 
 onMounted(() => {
-  axios.get('http://localhost:7000/jobs').then(response => {
-    jobs.value = response.data
-  })
+  try{
+    axios.get('http://localhost:7000/jobs').then(response => {
+      jobs.value = response.data
+    })
+  }catch(error){
+    console.log(error)
+  }
 })
 
 </script>

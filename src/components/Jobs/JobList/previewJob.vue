@@ -11,9 +11,13 @@ const props = defineProps({
 const job = ref(null);
 
 onMounted(() => {
-  axios.get(`http://localhost:7000/jobs/${props.id}`).then(response => {
-    job.value = response.data
-  })
+  try{
+    axios.get(`http://localhost:7000/jobs/${props.id}`).then(response => {
+      job.value = response.data
+    })
+  }catch(error){
+    console.log(error)
+  }
 })
 
 const goBack = () => window.history.back();
