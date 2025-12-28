@@ -16,6 +16,9 @@
     "format": "prettier --write --experimental-cli src/"
   },
   "dependencies": {
+    "@coreui/coreui": "^5.5.0",
+    "@coreui/vue": "^5.7.0",
+    "bootstrap": "^5.3.8",
     "vue": "^3.5.25"
   },
   "devDependencies": {
