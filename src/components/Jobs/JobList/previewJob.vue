@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue';
-import JobData from '@/components/Jobs/JobList/jobs.json';
+import { onMounted, ref } from 'vue';
+import axios from 'axios';
 import Card from '@/components/common/Card/Card.vue';
 import { RouterLink } from 'vue-router';
 
@@ -8,7 +8,13 @@ const props = defineProps({
   id: String
 });
 
-const job = ref(JobData.jobs.find(j => j.id === props.id));
+const job = ref(null);
+
+onMounted(() => {
+  axios.get(`http://localhost:7000/jobs/${props.id}`).then(response => {
+    job.value = response.data
+  })
+})
 
 const goBack = () => window.history.back();
 </script>

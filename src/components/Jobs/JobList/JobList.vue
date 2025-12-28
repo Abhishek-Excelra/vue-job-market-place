@@ -1,8 +1,15 @@
 <script setup>
-import { ref } from 'vue'
-import JobData from '@/components/Jobs/JobList/jobs.json'
+import { onMounted, ref } from 'vue'
+import axios from 'axios'
 import Card from '@/components/common/Card/Card.vue';
-const jobs = ref(JobData.jobs)
+const jobs = ref([])
+
+onMounted(() => {
+  axios.get('http://localhost:7000/jobs').then(response => {
+    jobs.value = response.data
+  })
+})
+
 </script>
 
 <template>
