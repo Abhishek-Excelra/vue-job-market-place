@@ -18,8 +18,9 @@
   "dependencies": {
     "@coreui/coreui": "^5.5.0",
     "@coreui/vue": "^5.7.0",
-    "bootstrap": "^5.3.8",
-    "vue": "^3.5.25"
+    "bootstrap": "^4.6.2",
+    "bootstrap-vue": "^2.23.1",
+    "vue": "^3.5.26"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
